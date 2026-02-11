@@ -1,21 +1,44 @@
-user_assignment=float(input("Enter the Assignment Score(0-100):"))
-user_midterm= float(input("Enter the Midterm Score(0-100):"))
-user_final_exam=float(input("Enter the Final Exam Scores(0-100):"))
-user_project=float(input("Enter the Project Score(0-100):"))
-if (user_assignment < 0 or user_assignment >100 or user_midterm < 0 or user_midterm > 100 or user_final_exam < 0 or user_final_exam > 100 or user_project < 0 or user_project > 100):
-    print("Error: All Terms Scores must be in between 0 to 100")
-else:
-    total_marks=(user_assignment * 0.30 + user_midterm * 0.25 + user_final_exam * 0.30 + user_project * 0.15)
+def get_score(prompt="Enter score: "):
+    """Get valid score (0.0-100.0) from user."""
+    while True:
+        try:
+            num=float(input(prompt))
+            if 0.0<= num <=100.0:
+                return num
+            else:
+                print("Enter the valid integer from 0 to 100")
+        except ValueError:
+            print("Enter the valid integer")
+
+def calculate_weighted_grade(assignments, midterm, final_exam, project):
+    """Calculate final grade using course weights."""
+    return (assignments * 0.30 + midterm * 0.25 + final_exam * 0.30 + project * 0.15)
     
-    print(f"Final mark: {total_marks:.2f}")
-    
-    if 90<= total_marks <= 100:
-        print("Student Grade is A")
-    elif 80 <= total_marks < 89:
-        print("Student Grade is B")
-    elif 70 <= total_marks < 79:
-        print("Student Grade is C")
-    elif 60 <= total_marks < 69:
-        print("Student Grade is D")
+
+def get_letter_grade(numeric_grade):
+    """Convert numeric grade to letter grade (A/B/C/D/F)."""
+    if 90<= numeric_grade <= 100:
+        return "A"
+    elif 80 <= numeric_grade < 89:
+        return "B"
+    elif 70 <= numeric_grade < 79:
+        return "C"
+    elif 60 <= numeric_grade < 69:
+        return "D"
     else:
-        print("Student Grade is F")
+        return "F"    
+
+def main():
+    """Run complete grade calculator program."""
+    assignment = get_score("Enter Assignment score: ")
+    midterm = get_score("Enter Midterm score: ")
+    final = get_score("Enter Final score: ")
+    project = get_score("Enter Project score: ")
+
+    grade = calculate_weighted_grade(assignment, midterm, final, project)
+    letter = get_letter_grade(grade)
+    print(f"Final grade: {grade:.2f}, Letter: {letter}")
+
+if __name__=="__main__":
+    main()
+
