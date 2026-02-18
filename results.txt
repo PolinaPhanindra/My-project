@@ -1,0 +1,7 @@
+name,math,science,english,average
+Alice,85,92,78,85.00
+Bob,88,75,90,84.33
+Charlie,70,80,65,71.67
+
+Class average: 80.33
+Top student: Alice (85.00)
